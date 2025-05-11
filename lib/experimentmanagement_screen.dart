@@ -19,11 +19,12 @@ class ExperimentManagementScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Flexible( // Ensures PersonalizedInsightsWidget doesn't demand infinite height from the Column
-              fit: FlexFit.loose,
+            Expanded(
+              flex: 2, // Gave PersonalizedInsightsWidget more flex
               child: const PersonalizedInsightsWidget(),
             ),
             Expanded(
+              flex: 1, // Gave TabBarView less flex
               child: TabBarView(
                 children: [
                   const ActiveExperimentsScreen(), // Changed to use the new screen
@@ -99,7 +100,7 @@ class PersonalizedInsightsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0), // Reduced bottom padding
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -138,72 +139,70 @@ class PersonalizedInsightsWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text("Acknowledge the relapse"),
+          const SizedBox(height: 8.0), // Added spacing
           const TextField(
             decoration: InputDecoration(labelText: "What triggered the relapse?"),
           ),
+          const SizedBox(height: 8.0), // Added spacing
           const TextField(
             decoration: InputDecoration(labelText: "How can you prevent this in the future?"),
           ),
-          Column( // This is the "Tools to get back on track" section
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Tools to get back on track",
-                style: ExperimentManagementScreen.sectionHeadingStyle,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Meditation"),
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Support Groups"),
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("Journaling"),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ToolsSection extends StatelessWidget {
-  const ToolsSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
+          const SizedBox(height: 32.0), // Changed spacing for consistency
+          const Text( // Restored the heading
             "Tools to get back on track",
             style: ExperimentManagementScreen.sectionHeadingStyle,
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Meditation"),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Support Groups"),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text("Journaling"),
+          const SizedBox(height: 16), // Added spacing between heading and buttons
+          SingleChildScrollView( // Restored SingleChildScrollView
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Meditation"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Support Groups"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Journaling"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Mindful Walking"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Body Scan"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Mindful Eating"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Gratitude List"),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Yoga Stretch"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 }
+
+// Removed ToolsSection class as it is unused

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './experimentmanagement_screen.dart'; // Import for sectionHeadingStyle
 
 class ActiveExperimentsScreen extends StatelessWidget {
   const ActiveExperimentsScreen({super.key});
@@ -12,7 +13,10 @@ class ActiveExperimentsScreen extends StatelessWidget {
           // The title for this screen's AppBar might be redundant if it's already part of a TabBarView
           // For now, let's keep it to match the original structure.
           // Consider removing or adjusting if the parent screen provides sufficient context.
-          title: const Text("Active Experiments"),
+          title: const Text(
+            "Active Experiments",
+            style: ExperimentManagementScreen.sectionHeadingStyle, // Apply the style
+          ),
           bottom: const TabBar(
             tabs: [
               Tab(text: "Ongoing"),
